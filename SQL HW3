@@ -1,0 +1,240 @@
+CREATE TABLE asia.Employee 
+8   ( 
+9   EmpID INT PRIMARY KEY NOT NULL, 
+10   EmpName VARCHAR (50) NOT NULL , 
+11   DeptID VARCHAR(10) NULL FOREIGN KEY REFERENCES asia.Department(DeptID) 
+12   ) 
+13   
+14   INSERT INTO asia.Employee VALUES 
+15   (1234,'Becky','1') 
+16   INSERT INTO asia.Employee VALUES 
+17   (9145,'Robert',null) 
+18   INSERT INTO asia.Employee VALUES 
+19   (1767,'Johnson',null) 
+20   INSERT INTO asia.Employee VALUES 
+21   (2345,'Molly','2') 
+22   INSERT INTO asia.Employee VALUES 
+23   (3456,'Rob','1') 
+24   INSERT INTO asia.Employee VALUES 
+25   (1324,'Ted','2') 
+26   
+27   SELECT * FROM asia.Employee 
+28   
+29   
+30
+31    
+32   
+33   
+34   DROP TABLE asia.Department 
+35   
+36 
+37   CREATE TABLE asia.Department 
+38   ( 
+39   DeptID VARCHAR(10) PRIMARY KEY NOT NULL, 
+40   DeptLocation VARCHAR (50) NOT NULL 
+41   ) 
+42   
+43   INSERT INTO asia.Department VALUES 
+44   ('1','Suite A') 
+45   INSERT INTO asia.Department VALUES 
+46   ('2','Suite B') 
+47   
+48   SELECT * FROM asia.Department 
+49   
+50   
+51   
+52   SELECT * FROM asia.Employee 
+53   SELECT * FROM asia.Department 
+54   
+55   
+56 
+57    
+58     
+59   
+60   DELETE FROM asia.Employee WHERE EmpID=1324 
+61   
+62   DELETE FROM asia.Department WHERE DeptID='2' 
+63   
+64   DROP TABLE asia.Employee 
+65   
+66   CREATE TABLE asia.Employee
+67   ( 
+68   EmpID INT PRIMARY KEY NOT NULL, 
+69   EmpName VARCHAR (50) NOT NULL , 
+70   DeptID VARCHAR(10) NULL FOREIGN KEY REFERENCES asia.Department(DeptID) 
+71   ON DELETE CASCADE 
+72   ) 
+73   /**********************End of column constraints********************/ 
+74   
+75   /************Table constraints given at the table level**************/ 
+76   
+77   /*********PRIMARY KEY-table level****************/ 
+78   
+79   DROP TABLE dbo.Classroom; 
+80   
+81   CREATE TABLE dbo.Classroom /* we cannot create a composite 
+82   primary key this way*/ 
+83   ( 
+84   BuildingID CHAR(5) PRIMARY KEY NOT NULL, 
+85   RoomNumber CHAR(5) PRIMARY KEY NOT NULL , 
+86   NoOfSeats INT NOT NULL 
+87   ) 
+88   
+89   
+90   CREATE TABLE dbo.Classroom 
+91   ( 
+92   BuildingID CHAR(5) NOT NULL, 
+93   RoomNumber CHAR(5) NOT NULL , 
+94   NoOfSeats INT NOT NULL , 
+95   PRIMARY KEY(BuildingID,RoomNumber) 
+96   ); 
+97   
+98   INSERT INTO dbo.Classroom VALUES 
+99   ('SFHB','22F','30') 
+100   INSERT INTO dbo.Classroom VALUES 
+101   ('SFHB','22D','35') 
+102   
+103   SELECT * FROM dbo.Classroom 
+104   
+105   /***************unique- table level********************/ 
+106   DROP TABLE dbo.Classroom; 
+107   
+108   CREATE TABLE dbo.Classroom 
+109   ( 
+110   ClassroomID CHAR(5) PRIMARY KEY NOT NULL, 
+111   BuildingID CHAR(5) NOT NULL, 
+112   RoomNumber CHAR(5) NOT NULL , 
+113   NoOfSeats INT NOT NULL, 
+114   UNIQUE(BuildingID,RoomNumber), 
+115   UNIQUE(NoOfSeats) 
+116   ); 
+117   
+118   
+119   INSERT INTO dbo.Classroom VALUES 
+120   ('C1','SFHB','22F','30') 
+121   INSERT INTO dbo.Classroom VALUES 
+122   ('C2','SFHB','22D','35') 
+123   
+124   SELECT * FROM dbo.Classroom 
+125   
+126   /*************Check constraint - table level**********/ 
+127   
+128   DROP TABLE asia.Employee; 
+129   
+130   
+131   CREATE TABLE asia.Employee 
+132   (
+133   EmployeeID INT PRIMARY KEY NOT NULL, 
+134   EmpName VARCHAR (50) NOT NULL, 
+135   Salary NUMERIC(10,3) NOT NULL , 
+136   StartDate DATE NOT NULL, 
+137   CHECK((Salary >=1500) and (StartDate>'2017-01-15')) 
+138   ) 
+139   
+140   INSERT INTO asia.Employee VALUES 
+141   (101,'Josh', '50000','2016-01-30') 
+142   INSERT INTO asia.Employee VALUES 
+143   (102,'Erica', '60000','2018-01-30') 
+144   
+145   DROP TABLE asia.Employee1; 
+146   
+147   
+148   CREATE TABLE asia.Employee1 
+149   ( 
+150   EmployeeID INT PRIMARY KEY NOT NULL, 
+151   EmpName VARCHAR (50) NOT NULL, 
+152   Salary NUMERIC(10,3) NOT NULL 
+153   CHECK(Salary >=1500), 
+154   StartDate DATE NOT NULL 
+155   CHECK(StartDate>'2017-01-15') 
+156   ) 
+157   
+158   INSERT INTO asia.Employee1 VALUES 
+159   (101,'Josh', '50000','2016-01-30') 
+160   INSERT INTO asia.Employee1 VALUES 
+161   (102,'Erica', '60000','2018-01-30') 
+162   
+163   /**************Foreign key - table level************/ 
+164   
+165   DROP TABLE asia.Employee 
+166   
+167   CREATE TABLE asia.Employee 
+168   ( 
+169   EmpID INT PRIMARY KEY NOT NULL, 
+170   EmpName VARCHAR (50) NOT NULL , 
+171   DeptID VARCHAR(10) NULL, 
+172   FOREIGN KEY(DeptID) REFERENCES asia.Department(DeptID) 
+173   ) 
+174   
+175   /***************************/ 
+176   
+177   DROP TABLE asia.Employee; 
+178   
+179   CREATE TABLE asia.Employee 
+180   ( 
+181   EmployeeID INT PRIMARY KEY NOT NULL, 
+182   EmpName VARCHAR (50) NOT NULL, 
+183   ); 
+184   
+185   INSERT INTO asia.Employee VALUES 
+186   (101,'Josh'); 
+187   INSERT INTO asia.Employee VALUES 
+188   (102,'Laurene'); 
+189   INSERT INTO asia.Employee VALUES 
+190   (103,'Andrea'); 
+191   INSERT INTO asia.Employee VALUES 
+192   (104,'Julian'); 
+193   INSERT INTO asia.Employee VALUES 
+194   (105,'Marsha'); 
+195   INSERT INTO asia.Employee VALUES 
+196   (106,'Ankita'); 
+197   INSERT INTO asia.Employee VALUES 
+198   (110,'Amita');
+199   INSERT INTO asia.Employee VALUES 
+200   (108,'Arianna'); 
+201   
+202   
+203   select * from asia.Employee; 
+204   
+205   DROP TABLE asia.Project; 
+206   
+207   CREATE TABLE asia.Project 
+208   ( 
+209   ProjectID CHAR(5) PRIMARY KEY NOT NULL, 
+210   ProjectCost DECIMAL(18,4) NOT NULL, 
+211   ); 
+212   
+213   INSERT INTO asia.Project VALUES 
+214   ('P1',300000); 
+215   INSERT INTO asia.Project VALUES 
+216   ('P2',500000); 
+217   
+218   SELECT * FROM asia.Project 
+219   SELECT * FROM asia.Employee 
+220   SELECT * FROM asia.ProjectAssignment 
+221   
+222   DROP TABLE asia.ProjectAssignment 
+223   
+224   CREATE TABLE asia.ProjectAssignment 
+225   ( 
+226   EmployeeID INT NOT NULL, 
+227   ProjectID CHAR(5) NOT NULL, 
+228   PRIMARY KEY(ProjectID,EmployeeID), 
+229   FOREIGN KEY(EmployeeID) REFERENCES 
+230   asia.Employee(EmployeeID), 
+231   FOREIGN KEY(ProjectID) REFERENCES 
+232   asia.Project(ProjectID) 
+233   ); 
+234   
+235   INSERT INTO asia.ProjectAssignment VALUES 
+236   (101,'P1'); 
+237   INSERT INTO asia.ProjectAssignment VALUES 
+238   (102,'P2'); 
+239   INSERT INTO asia.ProjectAssignment VALUES 
+240   (106,'P2'); 
+241   INSERT INTO asia.ProjectAssignment VALUES 
+242   (104,'P1'); 
+243   INSERT INTO asia.ProjectAssignment VALUES 
+244   (102,'P1'); 
+245   INSERT INTO asia.ProjectAssignment VALUES 
+246   (106,'P1'); 
